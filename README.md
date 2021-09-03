@@ -7,4 +7,4 @@
 - HTML
 - CSS
 
-[Live Demo]() :point_left:
+[Live Demo](https://furip0x.github.io/react_cv_app/) :point_left:
