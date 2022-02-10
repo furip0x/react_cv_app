@@ -4,6 +4,7 @@
 
 - ReactJs
 - State management
+- TypeScript
 - HTML
 - CSS
 
