@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAAA,aACE,+BAKE,sBACF,CACA,GACE,yBACF,CACF","file":"main.38bd0019.chunk.css","sourcesContent":["@media print {\r\n  button,\r\n  h1,\r\n  input,\r\n  textarea,\r\n  label {\r\n    display: none !important;\r\n  }\r\n  h2 {\r\n    text-align: left !important;\r\n  }\r\n}\r\n"]}
