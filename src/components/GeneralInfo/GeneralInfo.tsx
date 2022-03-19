@@ -1,5 +1,14 @@
 import React, { useState } from "react"
 import GeneralInfoEdit from "./GeneralInfoEdit"
+import {
+  Flex,
+  Button,
+  Input,
+  FormControl,
+  FormLabel,
+  HStack,
+  useToast,
+} from "@chakra-ui/react"
 
 interface IGeneralInformation {
   firstName: string
@@ -9,6 +18,7 @@ interface IGeneralInformation {
 }
 
 const GeneralInfo = () => {
+  const toast = useToast()
   const [edit, setEdit] = useState<boolean>(false)
   const [generalInformation, setGeneralInformation] =
     useState<IGeneralInformation>({
@@ -18,9 +28,22 @@ const GeneralInfo = () => {
       phoneNumber: "",
     })
 
-  const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    // if (!generalInformation.firstName || !generalInformation.lastName) {
+    //   toast({
+    //     title: "Please fill the form",
+    //     status: "warning",
+    //     duration: 2000,
+    //   })
+    // } else {
     setEdit(true)
+    toast({
+      title: "Changes saved",
+      status: "success",
+      duration: 2000,
+    })
+    // }
   }
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,56 +60,61 @@ const GeneralInfo = () => {
 
   if (!edit) {
     return (
-      <form className="cv-section-form">
-        <div className="form-group">
-          <label htmlFor="firstName">First name:</label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={generalInformation.firstName}
-            onChange={handleInput}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="lastName">Last name:</label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={generalInformation.lastName}
-            onChange={handleInput}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={generalInformation.email}
-            onChange={handleInput}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="phoneNumber">Phone Number:</label>
-          <input
-            type="text"
-            id="phoneNumber"
-            name="phoneNumber"
-            value={generalInformation.phoneNumber}
-            onChange={handleInput}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <button className="submit-btn" onClick={handleSubmit}>
-            Save
-          </button>
-        </div>
+      <form onSubmit={handleSubmit}>
+        <Flex direction="column" rowGap="15">
+          <Flex direction={["column", "row"]} columnGap="30" rowGap="15">
+            <FormControl isRequired>
+              <FormLabel htmlFor="firstName">First name:</FormLabel>
+              <Input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={generalInformation.firstName}
+                onChange={handleInput}
+                required
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="lastName">Last name:</FormLabel>
+              <Input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={generalInformation.lastName}
+                onChange={handleInput}
+                required
+              />
+            </FormControl>
+          </Flex>
+          <Flex direction={["column", "row"]} columnGap="30" rowGap="15">
+            <FormControl isRequired>
+              <FormLabel htmlFor="email">Email:</FormLabel>
+              <Input
+                type="email"
+                id="email"
+                name="email"
+                value={generalInformation.email}
+                onChange={handleInput}
+                required
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="phoneNumber">Phone Number:</FormLabel>
+              <Input
+                type="tel"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={generalInformation.phoneNumber}
+                onChange={handleInput}
+              />
+            </FormControl>
+          </Flex>
+          <HStack justifyContent="center" mt="3">
+            <Button type="submit" colorScheme="green" variant="solid">
+              Save
+            </Button>
+          </HStack>
+        </Flex>
       </form>
     )
   } else {

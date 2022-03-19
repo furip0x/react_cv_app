@@ -1,12 +1,13 @@
 import React from "react"
-import editIcon from "../../edit.png"
+import { Flex, Text, Button } from "@chakra-ui/react"
+import { EditIcon } from "@chakra-ui/icons"
 
 interface IEducationalEdit {
   schoolName: string
   titleOfStudy: string
   dateFrom: string
   dateTo: string
-  handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void
+  editForm: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const EducationalEdit = ({
@@ -14,30 +15,46 @@ const EducationalEdit = ({
   titleOfStudy,
   dateFrom,
   dateTo,
-  handleSubmit,
+  editForm,
 }: IEducationalEdit) => {
   return (
-    <div className="form-edit">
-      <div className="form-edit-content">
-        <div className="form-edit-group">
-          <strong>School Name:</strong> {schoolName}
-        </div>
-        <div className="form-edit-group">
-          <strong>Study:</strong> {titleOfStudy}
-        </div>
-        <div className="form-edit-group">
-          <strong>From:</strong> {dateFrom}
-        </div>
-        <div className="form-edit-group">
-          <strong>To:</strong> {dateTo}
-        </div>
-      </div>
-      <div className="form-edit-edit">
-        <button onClick={handleSubmit}>
-          <img src={editIcon} alt="edit" />
-        </button>
-      </div>
-    </div>
+    <Flex>
+      <Flex flex="1" flexDirection="column" gap="1">
+        <Flex flex="1">
+          <Text pr="2" fontWeight="700">
+            School Name:
+          </Text>
+          <Text>{schoolName}</Text>
+        </Flex>
+        <Flex flex="1">
+          <Text pr="2" fontWeight="700">
+            Study:
+          </Text>
+          <Text>{titleOfStudy}</Text>
+        </Flex>
+        <Flex flex="1">
+          <Text pr="2" fontWeight="700">
+            From:
+          </Text>
+          <Text>{dateFrom}</Text>
+        </Flex>
+        <Flex flex="1">
+          <Text pr="2" fontWeight="700">
+            To:
+          </Text>
+          <Text>{dateTo}</Text>
+        </Flex>
+      </Flex>
+      <Button
+        colorScheme="green"
+        variant="outline"
+        size="sm"
+        p="0.5"
+        onClick={editForm}
+      >
+        <EditIcon />
+      </Button>
+    </Flex>
   )
 }
 

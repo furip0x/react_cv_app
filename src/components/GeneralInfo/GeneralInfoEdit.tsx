@@ -1,5 +1,6 @@
 import React from "react"
-import editIcon from "../../edit.png"
+import { Flex, Text, Button } from "@chakra-ui/react"
+import { EditIcon } from "@chakra-ui/icons"
 
 interface IGeneralInfoEdit {
   firstName: string
@@ -17,27 +18,43 @@ const GeneralInfoedit = ({
   editForm,
 }: IGeneralInfoEdit) => {
   return (
-    <div className="form-edit">
-      <div className="form-edit-content">
-        <div className="form-edit-group">
-          <strong>First Name:</strong> {firstName}
-        </div>
-        <div className="form-edit-group">
-          <strong>Last Name:</strong> {lastName}
-        </div>
-        <div className="form-edit-group">
-          <strong>Email:</strong> {email}
-        </div>
-        <div className="form-edit-group">
-          <strong>Phone Number:</strong> {phoneNumber}
-        </div>
-      </div>
-      <div className="form-edit-edit">
-        <button onClick={editForm}>
-          <img src={editIcon} alt="edit" />
-        </button>
-      </div>
-    </div>
+    <Flex>
+      <Flex flex="1" flexDirection="column" gap="1">
+        <Flex flex="1">
+          <Text pr="2" fontWeight="700">
+            First name:
+          </Text>
+          <Text>{firstName}</Text>
+        </Flex>
+        <Flex flex="1">
+          <Text pr="2" fontWeight="700">
+            Last name:
+          </Text>
+          <Text>{lastName}</Text>
+        </Flex>
+        <Flex flex="1">
+          <Text pr="2" fontWeight="700">
+            Email:
+          </Text>
+          <Text>{email}</Text>
+        </Flex>
+        <Flex flex="1">
+          <Text fontWeight="700" pr="2">
+            Phone number:
+          </Text>
+          <Text>{phoneNumber}</Text>
+        </Flex>
+      </Flex>
+      <Button
+        colorScheme="green"
+        variant="outline"
+        size="sm"
+        p="0.5"
+        onClick={editForm}
+      >
+        <EditIcon />
+      </Button>
+    </Flex>
   )
 }
 

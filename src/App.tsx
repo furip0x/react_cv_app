@@ -2,8 +2,19 @@ import React, { useState } from "react"
 import GeneralInfo from "./components/GeneralInfo/GeneralInfo"
 import EducationalExp from "./components/EducationalExp/EducationalExp"
 import Experience from "./components/Experiences/Experience"
+import {
+  Box,
+  Flex,
+  HStack,
+  VStack,
+  Heading,
+  Button,
+  useToast,
+  Divider,
+} from "@chakra-ui/react"
 
 function App() {
+  const toast = useToast()
   const [educationItems, setEducationItems] = useState<string[]>([])
   const [experienceItems, setExperienceItems] = useState<string[]>([])
 
@@ -33,6 +44,11 @@ function App() {
         return newList
       })
     }
+    toast({
+      title: "Successfully deleted",
+      status: "success",
+      duration: 2000,
+    })
   }
 
   const eduComponents = educationItems.map((id) => (
@@ -43,51 +59,92 @@ function App() {
     <Experience key={id} id={id} handleDelete={handleDelete} />
   ))
 
+  const isPrint = eduComponents.length > 0 && expComponents.length > 0
+
   return (
-    <div className="cv-app">
-      <h1 className="cv-app-title">React CV App</h1>
-      <div className="cv-app-content">
-        <section className="cv-section">
-          <h2 className="cv-section-title">General Information</h2>
-          <GeneralInfo />
-        </section>
-        <section className="cv-section">
-          <h2 className="cv-section-title">Educational Experience</h2>
-          {eduComponents}
-          <div className="form-group">
-            <button
-              className="submit-btn"
-              onClick={() => handleClick("educationItems")}
+    <Box py="8" px="6" backgroundColor="gray.50">
+      <Heading as="h1" mb="8" textAlign="center">
+        React CV App
+      </Heading>
+      <Box
+        maxW="600"
+        border="2px"
+        borderColor="gray.200"
+        p="8"
+        mx="auto"
+        backgroundColor="white"
+      >
+        <VStack align="stretch" spacing="30px">
+          <Box>
+            <Heading
+              as="h2"
+              fontSize="3xl"
+              fontWeight="400"
+              textAlign="center"
+              mb="5"
             >
-              Add
-            </button>
-          </div>
-        </section>
-        <section className="cv-section">
-          <h2 className="cv-section-title">Job Experience</h2>
-          {expComponents}
-          <div className="form-group">
-            <button
-              className="submit-btn"
-              onClick={() => handleClick("experienceItems")}
+              General Information
+            </Heading>
+            <GeneralInfo />
+          </Box>
+          <Divider />
+          <Box>
+            <Heading
+              as="h2"
+              fontSize="3xl"
+              fontWeight="400"
+              textAlign="center"
+              mb="5"
             >
-              Add
-            </button>
-          </div>
-        </section>
-        <div
-          className={`form-group ${
-            eduComponents.length > 0 && expComponents.length > 0
-              ? ""
-              : "disabled"
-          }}`}
-        >
-          <button className="submit-btn print" onClick={() => window.print()}>
-            Print
-          </button>
-        </div>
-      </div>
-    </div>
+              Educational Experience
+            </Heading>
+            <VStack spacing="20px" align="stretch">
+              {eduComponents}
+            </VStack>
+            <HStack justifyContent="center" mt="5">
+              <Button
+                colorScheme="blue"
+                variant="solid"
+                onClick={() => handleClick("educationItems")}
+              >
+                Add
+              </Button>
+            </HStack>
+          </Box>
+          <Divider />
+          <Box>
+            <Heading
+              as="h2"
+              fontSize="3xl"
+              fontWeight="400"
+              textAlign="center"
+              mb="5"
+            >
+              Job Experience
+            </Heading>
+            <VStack spacing="20px" align="stretch">
+              {expComponents}
+            </VStack>
+            <HStack justifyContent="center" mt="5">
+              <Button
+                colorScheme="blue"
+                variant="solid"
+                onClick={() => handleClick("experienceItems")}
+              >
+                Add
+              </Button>
+            </HStack>
+          </Box>
+          {isPrint ? (
+            <Flex justifyContent="center">
+              <Button colorScheme="purple" onClick={() => window.print()}>
+                Print
+              </Button>
+            </Flex>
+          ) : null}
+        </VStack>
+      </Box>
+    </Box>
   )
 }
 
