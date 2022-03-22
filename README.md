@@ -5,6 +5,7 @@
 - ReactJs
 - State management
 - TypeScript
+- Chakra UI
 - HTML
 - CSS
 
