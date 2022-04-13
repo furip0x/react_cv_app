@@ -30,6 +30,13 @@ const GeneralInfo = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    // if (!generalInformation.firstName || !generalInformation.lastName) {
+    //   toast({
+    //     title: "Please fill the form",
+    //     status: "warning",
+    //     duration: 2000,
+    //   })
+    // } else {
     setEdit(true)
     toast({
       title: "Changes saved",
@@ -115,4 +122,4 @@ const GeneralInfo = () => {
   }
 }
 
-export default React.memo(GeneralInfo)
+export default GeneralInfo

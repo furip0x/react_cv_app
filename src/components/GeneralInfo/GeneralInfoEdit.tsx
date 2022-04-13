@@ -10,7 +10,7 @@ interface IGeneralInfoEdit {
   editForm: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const GeneralInfoEdit = ({
+const GeneralInfoedit = ({
   firstName,
   lastName,
   email,
@@ -58,4 +58,4 @@ const GeneralInfoEdit = ({
   )
 }
 
-export default GeneralInfoEdit
+export default GeneralInfoedit
